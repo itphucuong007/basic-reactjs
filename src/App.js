@@ -26,15 +26,26 @@ class App extends React.Component {
     // 20.3 Đổi các value của object state bằng cách dùng setState()
     this.setState({
       'name': 'Kiki',
-      'age': 2
+      'age': Math.floor((Math.random() * 100) + 10)
     });
-
 
   }
 
   handleOnMoverOver(event) {
     // console.log('>> Click me');
     console.log('event: ', event.pageX);
+  }
+
+  handleOnChangeInput = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      'name': event.target.value,
+      'age': Math.floor((Math.random() * 100) + 10)
+    });
+  }
+
+  handleOnSubmit = (event) => {
+    event.preventDefault();
   }
 
   render() {
@@ -44,12 +55,21 @@ class App extends React.Component {
         My name is {this.state.name} and i'm {this.state.age} years old and
         live in {this.state.address}
         <br />
-      
+        <button onClick={(event) => { this.handleClick(event) }}>Click handleClick</button>
        
-        <button onClick={(event) => {this.handleClick(event) }}>Click handleClick</button>
-        
-        <br />
-        <button onMouseOver={ this.handleOnMoverOver}>Hover handleOnMoverOver</button>
+        <form onSubmit={(event) => {this.handleOnSubmit(event)}}>
+
+          <input
+            type='text'
+            onChange={(event) => { this.handleOnChangeInput(event) }}
+          />
+
+          <button>Submit</button>
+
+
+        </form>
+
+
 
         <MyComponent></MyComponent>
       </div>
