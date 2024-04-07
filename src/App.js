@@ -17,8 +17,19 @@ class App extends React.Component {
 
   handleClick(event) {
     // console.log('>> Click me');
-    console.log('event.target: ', event.target);
-    console.log('event: ', event);
+    // console.log('event.target: ', event.target);
+    // console.log('event: ', event);
+
+    // 20.2 Vấn đề của this
+    // console.log('age: ', this.state.age);
+
+    // 20.3 Đổi các value của object state bằng cách dùng setState()
+    this.setState({
+      'name': 'Kiki',
+      'age': 2
+    });
+
+
   }
 
   handleOnMoverOver(event) {
@@ -32,10 +43,13 @@ class App extends React.Component {
       <div>
         My name is {this.state.name} and i'm {this.state.age} years old and
         live in {this.state.address}
-        <br/>
-        <button onClick={this.handleClick}>Click handleClick</button>
-        <br/>
-        <button onMouseOver={this.handleOnMoverOver}>Hover handleOnMoverOver</button>
+        <br />
+      
+       
+        <button onClick={(event) => {this.handleClick(event) }}>Click handleClick</button>
+        
+        <br />
+        <button onMouseOver={ this.handleOnMoverOver}>Hover handleOnMoverOver</button>
 
         <MyComponent></MyComponent>
       </div>
