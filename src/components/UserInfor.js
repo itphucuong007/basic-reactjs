@@ -58,7 +58,7 @@ class UserInfor extends React.Component {
                 <form onSubmit={(event) => { this.handleOnSubmit(event) }}>
                     <label>Your name</label>
                     <input
-                        type='text' 
+                        type='text'   value={this.state.name}
                         onChange={(event) => { this.handleOnChangeInput(event) }}
                     />
 
