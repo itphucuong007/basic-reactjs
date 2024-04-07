@@ -8,26 +8,36 @@ import MyComponent from './components/MyComponents';
 import React from 'react';
 
 class App extends React.Component {
- 
+
   state = {
     'name': 'pc007',
     'address': 'soviet Union',
     'age': 27,
+  }
 
+  handleClick(event) {
+    // console.log('>> Click me');
+    console.log('event.target: ', event.target);
+    console.log('event: ', event);
+  }
+
+  handleOnMoverOver(event) {
+    // console.log('>> Click me');
+    console.log('event: ', event.pageX);
   }
 
   render() {
     // jsx
     return (
       <div>
-        <p>
-          My name is {this.state["name"]} and i'm {this.state["age"]} years old and 
-          live in {this.state["address"]}
+        My name is {this.state.name} and i'm {this.state.age} years old and
+        live in {this.state.address}
         <br/>
-          My name is {this.state.name} and i'm {this.state.age} years old and 
-          live in {this.state.address}
-          <MyComponent></MyComponent>
-        </p>
+        <button onClick={this.handleClick}>Click handleClick</button>
+        <br/>
+        <button onMouseOver={this.handleOnMoverOver}>Hover handleOnMoverOver</button>
+
+        <MyComponent></MyComponent>
       </div>
     );
 
