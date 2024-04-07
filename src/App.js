@@ -5,25 +5,68 @@ import { increaseCounter, decreaseCounter } from './redux/action/counterAction';
 
 import MyComponent from './components/MyComponents';
 
+import React from 'react';
 
+class App extends React.Component {
+ 
+  state = {
+    'name': 'pc007',
+    'address': 'soviet Union',
+    'age': 27,
 
-const App = () => {
-  const count = useSelector(state => state.counter.count);
-  const dispatch = useDispatch();
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+  }
+
+  render() {
+    // jsx
+    return (
+      <div>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          My name is {this.state["name"]} and i'm {this.state["age"]} years old and 
+          live in {this.state["address"]}
+        <br/>
+          My name is {this.state.name} and i'm {this.state.age} years old and 
+          live in {this.state.address}
+          <MyComponent></MyComponent>
         </p>
-        <div>Count = {count}</div>
-        <button onClick={() => dispatch(increaseCounter())}>Increase</button>
-        <button onClick={() => dispatch(decreaseCounter())}>Decrease</button>
-      </header>
-    </div>
-  );
+      </div>
+    );
+
+
+  }
+
 }
+
+
+
+// const App = () => {
+//   return (
+//     <div>
+//       <p>
+//         hello world!!
+//         <MyComponent></MyComponent>
+//       </p>
+//     </div>
+//   );
+// }
+
+
+// const App = () => {
+//   const count = useSelector(state => state.counter.count);
+//   const dispatch = useDispatch();
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <div>Count = {count}</div>
+//         <button onClick={() => dispatch(increaseCounter())}>Increase</button>
+//         <button onClick={() => dispatch(decreaseCounter())}>Decrease</button>
+//       </header>
+//     </div>
+//   );
+// }
 
 
 
