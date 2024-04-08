@@ -5,25 +5,23 @@ import DisplayInfor from './DisplayInfor';
 
 
 class MyComponent extends React.Component {
-    render() {
 
-        // Tạo ra variable
-        let myAge = 50;
+    state = {
+        listUsers: [
+            {id: 1, name: 'pc001', age: "12" },
+            {id: 2, name: 'pc002', age: "22" },
+            {id: 3, name: 'pc003', age: "32" },
+            {id: 4, name: 'pc004', age: "42" },
+        ]
+    }
+
+    render() {
         return (
             <div>
-                My first Component
-                {Math.random()}
                 <UserInfor />
 
-                {/* Dạng 1: Kiểu 1 và 2 */}
-                <DisplayInfor name="PC007" age={12} />
-
-                {/*  Dạng 2: Truyền gián tiếp */}
-                <DisplayInfor name="PC007" age={myAge} />
-
-               
-
-
+                <DisplayInfor listUsers={this.state.listUsers} />
+        
             </div>
         );
 
