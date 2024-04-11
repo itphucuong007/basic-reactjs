@@ -23,20 +23,25 @@ class MyComponent extends React.Component {
     }
 
 
+    handleDeleteUser = (userId) => {
+        let listUsersClone = this.state.listUsers;
+        listUsersClone = listUsersClone.filter(item => item.id !== userId);
+        this.setState({
+            listUsers: listUsersClone
+        });
+    }
+
+
+
     render() {
-        const stringVar = 'Kiểu string';
-        const numberVar = 5412;
-
-        const arrayVar = [1,2,3,4];
-        const objectVar = {'name': 'kiểu object', 'age': 111 };
-
         return (
             <>
-                {stringVar} {numberVar} {JSON.stringify(arrayVar)} {JSON.stringify(objectVar)} 
-
                 <div className="A">
                     <AddUserInfor handleAddNewUser={this.handleAddNewUser} />
-                    <DisplayInfor listUsers={this.state.listUsers} />
+                    <DisplayInfor
+                        listUsers={this.state.listUsers}
+                        handleDeleteUser={this.handleDeleteUser}
+                    />
                 </div>
 
                 <div className="B">
