@@ -20,7 +20,7 @@ class DisplayInfor extends React.Component {
         console.log(listUsers);
         return (
 
-            <div>
+            <div className="display-infor-container">
                 <div>
                     <br />
                     <span onClick={() => { this.handleShowHide() }}>
@@ -35,7 +35,7 @@ class DisplayInfor extends React.Component {
                             // console.log(">>> Check map user: ", user);
                             return (
                                 <div key={user.id} className={+user.age > 18 ? 'green' : 'red'} >
-                                    <div>name: {user.name}</div>
+                                    <div style={{ color:'blue', paddingTop:'50px', fontWeight:'bold' }}>name: {user.name}</div>
                                     <div>age: {user.age}</div>
                                     <hr />
                                 </div>
