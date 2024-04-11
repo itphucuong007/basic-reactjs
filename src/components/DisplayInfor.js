@@ -1,5 +1,6 @@
 import React from "react";
-
+import './DisplayInfor.scss';
+import './../logo.svg';
 
 class DisplayInfor extends React.Component {
 
