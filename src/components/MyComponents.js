@@ -24,11 +24,15 @@ class MyComponent extends React.Component {
 
 
     render() {
-        
+        const stringVar = 'Kiểu string';
+        const numberVar = 5412;
+
+        const arrayVar = [1,2,3,4];
+        const objectVar = {'name': 'kiểu object', 'age': 111 };
 
         return (
             <>
-               
+                {stringVar} {numberVar} {JSON.stringify(arrayVar)} {JSON.stringify(objectVar)} 
 
                 <div className="A">
                     <AddUserInfor handleAddNewUser={this.handleAddNewUser} />
