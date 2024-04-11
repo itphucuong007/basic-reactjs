@@ -23,16 +23,27 @@ class MyComponent extends React.Component {
     }
 
 
-
-
     render() {
+        const stringVar = 'Kiểu string';
+        const numberVar = 5412;
+
+        const arrayVar = [1,2,3,4];
+        const objectVar = {'name': 'kiểu object', 'age': 111 };
+
         return (
-            <div>
-                <AddUserInfor handleAddNewUser={this.handleAddNewUser} />
+            <>
+                {stringVar} {numberVar} {JSON.stringify(arrayVar)} {JSON.stringify(objectVar)} 
 
-                <DisplayInfor listUsers={this.state.listUsers} />
+                <div className="A">
+                    <AddUserInfor handleAddNewUser={this.handleAddNewUser} />
+                    <DisplayInfor listUsers={this.state.listUsers} />
+                </div>
 
-            </div>
+                <div className="B">
+
+                </div>
+            </>
+
         );
 
     }

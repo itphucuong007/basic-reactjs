@@ -9,11 +9,10 @@ import React from 'react';
 
 class App extends React.Component {
 
-
   render() {
     // jsx
     return (
-      <div>
+      <div className="app-container">
         <MyComponent></MyComponent>
       </div>
     );
@@ -22,8 +21,6 @@ class App extends React.Component {
   }
 
 }
-
-
 
 // const App = () => {
 //   return (
