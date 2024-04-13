@@ -30,7 +30,6 @@ class DisplayInfor extends React.Component {
     
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         console.log('3. call componentDidUpdate: ', this.props, prevProps);
-
     }
 
 
