@@ -4,9 +4,15 @@ import logo from './../logo.svg';
 
 class DisplayInfor extends React.Component {
 
-    state = {
-        isShowListUser: true
-    };
+    constructor(props) {
+        console.log('0. call constructor');
+        super(props);
+        this.state = {
+            isShowListUser: true
+        };
+    }
+
+
 
     handleShowHide = () => {
         this.setState({
@@ -15,10 +21,23 @@ class DisplayInfor extends React.Component {
 
     };
 
+    componentDidMount = () => {
+        console.log('2. call componentDidMount: ');
+        setTimeout(() => {
+            document.title = "hello";
+        }, 3000);
+    }
+    
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        console.log('3. call componentDidUpdate: ', this.props, prevProps);
+
+    }
+
 
     render() {
+        console.log('1. call render ');
         const { listUsers } = this.props;
-        console.log(listUsers);
+        // console.log(listUsers);
         return (
 
             <div className="display-infor-container">
