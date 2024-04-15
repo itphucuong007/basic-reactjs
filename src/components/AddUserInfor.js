@@ -120,10 +120,11 @@ const AddUserInfor = (props) => {
     }
 
 
+
     return (
         <div>
             My name is {name} and i'm {age} years old and
-            live in {this.state.address}
+            live in {address}
             < br />
             <button onClick={(event) => { handleClick(event) }}>Click handleClick</button>
             <form onSubmit={(event) => { handleOnSubmit(event) }}>
