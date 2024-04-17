@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     {/*<React.StrictMode>*/}
-    <button className='btn btn-success'>test bootstrap</button>
+   
     <App />
 
     {/*</React.StrictMode>*/}
