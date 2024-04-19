@@ -53,7 +53,7 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <MenuItem
                             icon={<MdDashboard />}
-                            MDashboard
+                        
                             suffix={<span className="badge red">New</span>}
                         >
                             <Link to='/admins' />
