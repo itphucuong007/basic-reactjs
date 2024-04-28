@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
 import { FcPlus } from 'react-icons/fc';
 import axios from 'axios';
+
+import { toast } from 'react-toastify';
 
 const ModalCreateUser = (props) => {
     const { show, setShow } = props;
@@ -14,7 +15,7 @@ const ModalCreateUser = (props) => {
         setEmail("")
         setPassword("")
         setUsername("")
-        setRole("")
+        setRole("USER")
         setImage("")
         setPreviewImage("")
     };
@@ -26,7 +27,7 @@ const ModalCreateUser = (props) => {
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("");
 
-    const handleUploadImage = (event) => {
+      const handleUploadImage = (event) => {
         // kiểm tra file đã upload chưa ?
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImage(URL.createObjectURL(event.target.files[0]));
@@ -35,9 +36,29 @@ const ModalCreateUser = (props) => {
         console.log('upload file', event.target.files[0]);
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+   
+
     const handleSubmitCreateUser = async () => {
         // let data = { email: email, password: password, username: username, role: role, userImage: image, }
         // console.log(data);
+
+        const isValidEmail = validateEmail(email)
+        if(!isValidEmail) {
+            toast.error('invalid email')
+            return;
+        }
+
+        if(!password) {
+            toast.error('invalid password')
+            return;
+        }
 
         const FormData = require('form-data');
         const data = new FormData();
@@ -47,8 +68,19 @@ const ModalCreateUser = (props) => {
         data.append('role', role);
         data.append('userImage', image);
 
-        let res = await axios.post('http://localhost:8080/api/v1/participant', data);
-        console.log('check res: ', res);
+        let res = await axios.post('http://localhost:8081/api/v1/participant', data);
+
+        console.log('check res: ', res.data);
+        if(res.data && res.data.EC === 0) {
+            toast.success(res.data.EM)
+            handleClose();
+        }
+
+        if(res.data && res.data.EC !== 0) {
+            toast.error(res.data.EM)
+           
+        }
+
 
     }
 
@@ -124,12 +156,7 @@ const ModalCreateUser = (props) => {
                                 onChange={(event) => handleUploadImage(event)}
                             />
                         </div>
-
-                        {/* <div className="col-md-12 img-preview">
-                             <span>Image review</span> 
-                            <img src='https://cdn.tuoitre.vn/thumb_w/730/471584752817336320/2023/1/17/571238e2-78fa-4099-b34e-9f0b8a5b3eb9-16739311416891725962966.jpg' />
-                        </div> */}
-
+                  
                         <div className="col-md-12 img-preview">
                             {previewImage
                                 ? <img src={previewImage} />
