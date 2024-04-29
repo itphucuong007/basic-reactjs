@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react"
-import { getAllUsers } from '../../../services/apiServices'
 
 const TableUser = (props) => {
+    
+    // cách 1 lấy props của component cha
+    const { listUsers } = props
 
-    const [listUsers, setListUsers] = useState([])
-
-    useEffect(async () => {
-        fetchListUsers()
-    }, [])
-
-    const fetchListUsers = async () => {
-        let res = await getAllUsers()
-        console.log(res);
-
-        if (res.EC === 0) {
-            setListUsers(res.DT)
-        }
-
-    }
-
+    // cách 2 lấy props của component cha
+    // const listUsers = props.listUsers
     return (
         <>
             <table className="table table-hover table-bordered">
@@ -36,7 +23,7 @@ const TableUser = (props) => {
                         && listUsers.map((item, index) => {
                             return (
                                 <tr key={`table-user${index}`}>
-                                    <td scope="row">{index + 1}</td>
+                                    <td scope="row">{item.id}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
