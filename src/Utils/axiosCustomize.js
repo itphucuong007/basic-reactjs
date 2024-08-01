@@ -15,14 +15,14 @@ instance.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 instance.interceptors.response.use(function (response) {
-    console.log('interceptors: ', response);
-    console.log('response.data: ', response.data);
+    // console.log('interceptors: ', response);
+    // console.log('response.data: ', response.data);
 
     return response && response.data ? response.data : response;
 
 }, function (error) {
-    console.log('error interceptors: ', error);
-    console.log('error.data: ', error.data);
+    // console.log('error interceptors: ', error);
+    // console.log('error.data: ', error.data);
     return error && error.response && error.response.data ? error.response.data : Promise.reject(error);
 });
 
