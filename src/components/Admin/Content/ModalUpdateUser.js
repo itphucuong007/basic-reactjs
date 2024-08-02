@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-import { postCreateNewUser } from '../../../services/apiServices';
+import { putUpdateUser } from '../../../services/apiServices';
 
 import _ from 'lodash';
 
@@ -20,10 +20,10 @@ const ModalUpdateUser = (props) => {
             setRole(dataUpdate.role)
             setImage("")
 
-            if(dataUpdate.image) {
+            if (dataUpdate.image) {
                 setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`)
             }
-        
+
             console.log('efffect', dataUpdate)
         }
 
@@ -37,6 +37,7 @@ const ModalUpdateUser = (props) => {
         setRole("USER")
         setImage("")
         setPreviewImage("")
+        props.resetUpdateData()
     };
 
     const [email, setEmail] = useState("");
@@ -55,34 +56,12 @@ const ModalUpdateUser = (props) => {
         console.log('upload file', event.target.files[0]);
     }
 
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
+    
 
 
     const handleSubmitCreateUser = async () => {
-        // let data = { email: email, password: password, username: username, role: role, userImage: image, }
-        // console.log(data);
-
-        const isValidEmail = validateEmail(email)
-        if (!isValidEmail) {
-            toast.error('invalid email')
-            return;
-        }
-
-        if (!password) {
-            toast.error('invalid password')
-            return;
-        }
-
-
-        let data = await postCreateNewUser(email, password, username, role, image)
-        // console.log('check data interceptor: ', data);
-
+        
+        let data = await putUpdateUser(dataUpdate.id, username, role, image)
 
         if (data && data.EC === 0) {
             toast.success(data.EM)
