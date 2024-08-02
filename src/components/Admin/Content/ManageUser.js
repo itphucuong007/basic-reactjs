@@ -1,4 +1,4 @@
-import ModalCreateUser from "./ModalCreateUser";
+
 import './ManageUser.scss';
 import { FcPlus } from 'react-icons/fc';
 
@@ -6,18 +6,20 @@ import TableUser from "./TableUser";
 
 import { useEffect, useState } from "react"
 import { getAllUsers } from '../../../services/apiServices'
+
+import ModalCreateUser from "./ModalCreateUser";
 import ModalUpdateUser from "./ModalUpdateUser";
-
-
-
+import ModalViewUser from "./ModalViewUser";
 
 
 const ManageUser = (props) => {
 
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
-    const [dataUpdate, setDataUpdate] = useState({})
 
+    const [showModalViewUser, setShowModalViewUser] = useState(false);
+
+    const [dataUpdate, setDataUpdate] = useState({})
     const [listUsers, setListUsers] = useState([])
 
     useEffect(() => {
@@ -39,7 +41,12 @@ const ManageUser = (props) => {
         // console.log(user);
     }
 
-    const resetUpdateData = () =>{
+    const handleClickBtnView = (user) => {
+        setShowModalViewUser(true)
+        setDataUpdate(user)
+    }
+
+    const resetUpdateData = () => {
         setDataUpdate({})
     }
 
@@ -60,6 +67,7 @@ const ManageUser = (props) => {
                     <TableUser
                         listUsers={listUsers}
                         handleClickBtnUpdate={handleClickBtnUpdate}
+                        handleClickBtnView={handleClickBtnView}
                     />
                 </div>
 
@@ -72,6 +80,14 @@ const ManageUser = (props) => {
                 <ModalUpdateUser
                     show={showModalUpdateUser}
                     setShow={setShowModalUpdateUser}
+                    dataUpdate={dataUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUpdateData={resetUpdateData}
+                />
+
+                <ModalViewUser
+                    show={showModalViewUser}
+                    setShow={setShowModalViewUser}
                     dataUpdate={dataUpdate}
                     fetchListUsers={fetchListUsers}
                     resetUpdateData={resetUpdateData}
