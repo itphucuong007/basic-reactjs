@@ -3,14 +3,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
   return (
     <Navbar bg="light" expand="lg" className="bg-body-tertiary">
       <Container>
 
-     
+
         <NavLink className='navbar-brand' to='/' >My project</NavLink>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,7 +30,7 @@ const Header = () => {
           </Nav>
 
           <Nav>
-            <button className='btn-login'>Login</button>
+            <button className='btn-login' onClick={() => handleLogin()}>Login</button>
             <button className='btn-signup'>Sign up</button>
 
             <NavDropdown title="Setting" id="basic-nav-dropdown">
