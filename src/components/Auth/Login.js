@@ -2,6 +2,9 @@ import { useState } from 'react';
 import './Login.scss';
 import { useNavigate } from 'react-router-dom';
 
+import { postLogin } from '../../services/apiServices';
+import { toast } from 'react-toastify';
+
 const Login = (props) => {
 
     const [email, setEmail] = useState("");
@@ -9,9 +12,21 @@ const Login = (props) => {
 
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        alert('me')
+    const handleLogin = async () => {
+        let data = await postLogin(email, password)
+        console.log('check respone', data);
+
+        if (data && +data.EC === 0) {
+            toast.success(data.EM)
+            navigate('/')
+        }
+
+        if (data && +data.EC !== 0) {
+            toast.error(data.EM)
+        }
     }
+
+
 
     return (
         <div className='login-container'>
