@@ -35,6 +35,7 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     // console.log('error interceptors: ', error);
     // console.log('error.data: ', error.data);
+    NProgress.done();
     return error && error.response && error.response.data ? error.response.data : Promise.reject(error);
 });
 
