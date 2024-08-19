@@ -3,18 +3,19 @@ import './Login.scss';
 import { useNavigate } from 'react-router-dom';
 import { postLogin } from '../../services/apiServices';
 import { toast } from 'react-toastify';
-
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
+
+import { ImSpinner10 } from "react-icons/im";
 
 const Login = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
+    const [isLoading, setIsLoading] = useState(false);
 
     const validateEmail = (email) => {
         return String(email)
@@ -35,12 +36,14 @@ const Login = (props) => {
             toast.error('invalid password')
             return;
         }
+        setIsLoading(true)
 
         let data = await postLogin(email, password)
         console.log('check respone', data);
 
         if (data && +data.EC === 0) {
             dispatch(doLogin(data))
+            setIsLoading(false)
 
             toast.success(data.EM)
             navigate('/')
@@ -48,6 +51,8 @@ const Login = (props) => {
 
         if (data && +data.EC !== 0) {
             toast.error(data.EM)
+
+            setIsLoading(true)
         }
     }
 
@@ -95,8 +100,11 @@ const Login = (props) => {
                     <button
                         className='btn-submit'
                         onClick={() => handleLogin()}
+                        disabled={isLoading}
                     >
-                        Login to MyForm
+                        {isLoading === true && <ImSpinner10 className="loader-icon" />}
+                        <span> Login to MyForm</span>
+
                     </button>
 
                 </div >
